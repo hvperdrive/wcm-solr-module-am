@@ -1,5 +1,5 @@
 {
-  "name": "wcm-solr-am-module",
+  "name": "wcm-solr-module-am",
   "version": "0.0.1",
   "description": "Solr module",
   "main": "app/routes/index.js",
@@ -22,9 +22,25 @@
           "accordion": true,
           "variables": [
             {
+              "label": "Search API domain",
+              "description": "Search API domain.",
+              "key": "searchApiDomain",
+              "value": "",
+              "type": "text",
+              "required": true
+            },
+            {
+              "label": "Current domain",
+              "description": "Current domain.",
+              "key": "currentDomain",
+              "value": "",
+              "type": "text",
+              "required": true
+            },
+            {
               "label": "Consumer key",
               "description": "Your consumer key for Twitter.",
-              "key": "consumer_key",
+              "key": "consumerKey",
               "value": "",
               "type": "text",
               "required": true
@@ -32,7 +48,7 @@
             {
               "label": "Consumer secret",
               "description": "The consumer secret for Twitter",
-              "key": "consumer_secret",
+              "key": "consumerSecret",
               "value": "",
               "type": "text",
               "required": true
@@ -74,6 +90,7 @@
     "mockery": "~2.0.0",
     "mongoose": "~4.9.9",
     "nock": "~9.0.13",
+    "node-uuid": "~1.4.8",
     "rewire": "~2.5.2",
     "run-sequence": "~1.2.2"
   }
