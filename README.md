@@ -23,7 +23,7 @@ There is no API available.
 ### Implementation
 
 #### ArcGIS urls
-1. Add all the required settings
+1. Add all the required settings  
     1.1. Go to modules  
     1.2. Edit the Solr module  
     1.3. Under __Variables__ open the __Solr__  
