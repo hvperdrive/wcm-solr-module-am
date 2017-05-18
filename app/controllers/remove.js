@@ -1,8 +1,9 @@
 require("rootpath")();
 var Helpers = require("./helpers");
 var VariableHelper = require("../helpers/variables");
+var Emitter = require("app/middleware/emitter");
 
-module.exports = function(data) {
+Emitter.on("contentRemoved", function(data) {
     if (Helpers.validate(data)) { // Check the CT
         // Get the latest variables
         VariableHelper()
@@ -17,4 +18,4 @@ module.exports = function(data) {
                 console.log("Oh ooh...", err); // eslint-disable-line no-console
             });
     }
-};
+});
