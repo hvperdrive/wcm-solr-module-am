@@ -31,7 +31,7 @@ module.exports = function(data) {
             categories: [],
             title: data.project.fields.title.nl,
             body: data.project.fields.body.nl,
-            url: data.variables.currentDomain + "projects/" + data.project.meta.slug.nl
+            url: data.variables.currentDomain + "projecten/" + data.project.meta.slug.nl
         }
     };
 
