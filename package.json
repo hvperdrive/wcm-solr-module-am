@@ -1,97 +1,97 @@
 {
-  "name": "wcm-solr-module-am",
-  "version": "0.0.1",
-  "description": "Solr module",
-  "main": "app/routes/index.js",
-  "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/istanbul cover --dir ./coverage ./node_modules/.bin/_mocha -- -R spec -t 15000 --recursive --slow 2"
-  },
-  "keywords": [
-    "solr",
-    "search"
-  ],
-  "wcmModule": {
-    "frontend": null,
-    "backend": {
-      "dirPath": "app/",
-      "variables": [
-        {
-          "group": "Solr",
-          "key": "solr",
-          "enabled": true,
-          "accordion": true,
-          "variables": [
-            {
-              "label": "Search API domain",
-              "description": "Search API domain.",
-              "key": "searchApiDomain",
-              "value": "",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Current domain",
-              "description": "Current domain.",
-              "key": "currentDomain",
-              "value": "",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Consumer key",
-              "description": "Your consumer key for Twitter.",
-              "key": "consumerKey",
-              "value": "",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Consumer secret",
-              "description": "The consumer secret for Twitter",
-              "key": "consumerSecret",
-              "value": "",
-              "type": "text",
-              "required": true
-            }
-          ]
+    "name": "wcm-solr-module-am",
+    "version": "0.0.2",
+    "description": "Solr module",
+    "main": "app/routes/index.js",
+    "scripts": {
+        "test": "NODE_ENV=test ./node_modules/.bin/istanbul cover --dir ./coverage ./node_modules/.bin/_mocha -- -R spec -t 15000 --recursive --slow 2"
+    },
+    "keywords": [
+        "solr",
+        "search"
+    ],
+    "wcmModule": {
+        "frontend": null,
+        "backend": {
+            "dirPath": "app/",
+            "variables": [
+                {
+                    "group": "Solr",
+                    "key": "solr",
+                    "enabled": true,
+                    "accordion": true,
+                    "variables": [
+                        {
+                            "label": "Search API domain",
+                            "description": "Search API domain.",
+                            "key": "searchApiDomain",
+                            "value": "",
+                            "type": "text",
+                            "required": true
+                        },
+                        {
+                            "label": "Current domain",
+                            "description": "Current domain.",
+                            "key": "currentDomain",
+                            "value": "",
+                            "type": "text",
+                            "required": true
+                        },
+                        {
+                            "label": "Consumer key",
+                            "description": "Your consumer key for Twitter.",
+                            "key": "consumerKey",
+                            "value": "",
+                            "type": "text",
+                            "required": true
+                        },
+                        {
+                            "label": "Consumer secret",
+                            "description": "The consumer secret for Twitter",
+                            "key": "consumerSecret",
+                            "value": "",
+                            "type": "text",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "routeDirPaths": [
+                "app/routes/"
+            ]
         }
-      ],
-      "routeDirPaths": [
-        "app/routes/"
-      ]
+    },
+    "author": "Thomas Bormans",
+    "license": "MIT",
+    "dependencies": {
+        "lodash": "~4.17.4",
+        "node-uuid": "~1.4.7",
+        "q": "~1.4.1",
+        "remove": "~0.1.5",
+        "request": "~2.79.0",
+        "rootpath": "~0.1.2"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "~2.4.0",
+        "apidoc-swagger": "git+https://github.com/JvJefke/apidoc-swagger.git",
+        "chai": "~3.5.0",
+        "eslint": "~3.19.0",
+        "gulp": "~3.9.1",
+        "gulp-angular-templatecache": "~2.0.0",
+        "gulp-apidoc": "~0.2.0",
+        "gulp-apidoc-swagger": "~0.2.2",
+        "gulp-clean": "~0.3.2",
+        "gulp-replace": "~0.5.4",
+        "gulp-zip": "~3.2.0",
+        "install": "~0.8.4",
+        "istanbul": "~0.4.5",
+        "jshint": "~2.9.4",
+        "mocha": "~3.4.1",
+        "mockery": "~2.0.0",
+        "mongoose": "~4.9.9",
+        "nock": "~9.0.13",
+        "node-uuid": "~1.4.8",
+        "rewire": "~2.5.2",
+        "run-sequence": "~1.2.2"
     }
-  },
-  "author": "Thomas Bormans",
-  "license": "MIT",
-  "dependencies": {
-    "lodash": "~4.17.4",
-    "node-uuid": "~1.4.7",
-    "q": "~1.4.1",
-    "remove": "~0.1.5",
-    "request": "~2.79.0",
-    "rootpath": "~0.1.2"
-  },
-  "devDependencies": {
-    "@types/bcryptjs": "~2.4.0",
-    "apidoc-swagger": "git+https://github.com/JvJefke/apidoc-swagger.git",
-    "chai": "~3.5.0",
-    "eslint": "~3.19.0",
-    "gulp": "~3.9.1",
-    "gulp-angular-templatecache": "~2.0.0",
-    "gulp-apidoc": "~0.2.0",
-    "gulp-apidoc-swagger": "~0.2.2",
-    "gulp-clean": "~0.3.2",
-    "gulp-replace": "~0.5.4",
-    "gulp-zip": "~3.2.0",
-    "install": "~0.8.4",
-    "istanbul": "~0.4.5",
-    "jshint": "~2.9.4",
-    "mocha": "~3.4.1",
-    "mockery": "~2.0.0",
-    "mongoose": "~4.9.9",
-    "nock": "~9.0.13",
-    "node-uuid": "~1.4.8",
-    "rewire": "~2.5.2",
-    "run-sequence": "~1.2.2"
-  }
 }
