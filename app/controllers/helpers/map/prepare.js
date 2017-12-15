@@ -35,7 +35,6 @@ module.exports = function(data) {
 				ignoreHref: true,
 				ignoreImage: true,
 				preserveNewlines: true,
-				uppercaseHeadings: false,
 			}),
 			url: data.variables.currentDomain + "projecten/" + data.project.meta.slug.nl,
 		},
