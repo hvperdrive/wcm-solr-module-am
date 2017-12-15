@@ -64,6 +64,7 @@
     "author": "Thomas Bormans",
     "license": "MIT",
     "dependencies": {
+        "html-to-text": "^3.3.0",
         "lodash": "~4.17.4",
         "node-uuid": "~1.4.7",
         "q": "~1.4.1",

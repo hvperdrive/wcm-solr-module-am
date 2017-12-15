@@ -1,9 +1,16 @@
 require("rootpath")();
 var _ = require("lodash");
+var htmlToText = require("html-to-text");
 
 var methods = {
     upsert: "PUT",
     remove: "DELETE"
+};
+
+var htmlToTextOptions = {
+    ignoreHref: true,
+    ignoreImage: true,
+    preserveNewlines: true
 };
 
 module.exports = function(data) {
@@ -20,7 +27,7 @@ module.exports = function(data) {
         json: true,
         body: {
             app: "antwerpenmorgen",
-            summary: data.project.fields.intro.nl,
+            summary: htmlToText.fromString(data.project.fields.intro.nl, htmlToTextOptions),
             thumbnail: "",
             languages: "nl",
             keywords: _.map(data.project.meta.taxonomy.tags, function(tag) {
@@ -30,7 +37,7 @@ module.exports = function(data) {
             id: data.project.uuid,
             categories: [],
             title: data.project.fields.title.nl,
-            body: data.project.fields.body.nl,
+            body: htmlToText.fromString(data.project.fields.body.nl || "", htmlToTextOptions),
             url: data.variables.currentDomain + "projecten/" + data.project.meta.slug.nl
         }
     };
