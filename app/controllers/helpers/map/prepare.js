@@ -7,6 +7,12 @@ var methods = {
 	remove: "DELETE",
 };
 
+var htmlToTextOptions = {
+	ignoreHref: true,
+	ignoreImage: true,
+	preserveNewlines: true,
+};
+
 module.exports = function(data) {
 	// Set request options
 	data.options = {
@@ -21,7 +27,7 @@ module.exports = function(data) {
 		json: true,
 		body: {
 			app: "antwerpenmorgen",
-			summary: data.project.fields.intro.nl,
+			summary: htmlToText.fromString(data.project.fields.intro.nl, htmlToTextOptions),
 			thumbnail: "",
 			languages: "nl",
 			keywords: _.map(data.project.meta.taxonomy.tags, function(tag) {
@@ -31,11 +37,7 @@ module.exports = function(data) {
 			id: data.project.uuid,
 			categories: [],
 			title: data.project.fields.title.nl,
-			body: htmlToText.fromString(data.project.fields.body.nl || "", {
-				ignoreHref: true,
-				ignoreImage: true,
-				preserveNewlines: true,
-			}),
+			body: htmlToText.fromString(data.project.fields.body.nl || "", htmlToTextOptions),
 			url: data.variables.currentDomain + "projecten/" + data.project.meta.slug.nl,
 		},
 	};
