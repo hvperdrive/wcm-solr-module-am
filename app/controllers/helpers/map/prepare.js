@@ -1,5 +1,6 @@
 require("rootpath")();
 var _ = require("lodash");
+var htmlToText = require("html-to-text");
 
 var methods = {
 	upsert: "PUT",
@@ -30,7 +31,12 @@ module.exports = function(data) {
 			id: data.project.uuid,
 			categories: [],
 			title: data.project.fields.title.nl,
-			body: data.project.fields.body.nl,
+			body: htmlToText.fromString(data.project.fields.body.nl || "", {
+				ignoreHref: true,
+				ignoreImage: true,
+				preserveNewlines: true,
+				uppercaseHeadings: false,
+			}),
 			url: data.variables.currentDomain + "projecten/" + data.project.meta.slug.nl,
 		},
 	};
