@@ -3,7 +3,7 @@ var Helpers = require("./helpers");
 var VariableHelper = require("../helpers/variables");
 var Emitter = require("@wcm/module-helper").emitter;
 
-Emitter.on("contentRemoved", function(data) {
+Emitter.on("content.removed", function(data) {
 	if (Helpers.validate(data)) { // Check the CT
 		// Get the latest variables
 		VariableHelper()
