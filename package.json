@@ -1,6 +1,6 @@
 {
     "name": "@wcm/solr-am",
-    "version": "1.0.5",
+    "version": "1.0.4",
     "description": "Solr module",
     "main": "app",
     "scripts": {
