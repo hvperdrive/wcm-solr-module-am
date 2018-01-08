@@ -1,3 +1,6 @@
+"use strict";
+
+const Q = require("q");
 const R = require("ramda");
 
 const VariableHelper = require("../helpers/variables");
