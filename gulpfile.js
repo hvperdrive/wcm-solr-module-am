@@ -1,11 +1,14 @@
 "use strict";
 
+var _ = require("lodash");
 var gulp = require("gulp");
 var apidocSwagger = require("gulp-apidoc-swagger");
 var angularTemplatecache = require("gulp-angular-templatecache");
 var replace = require("gulp-replace");
 var fs = require("fs");
 var packageConfig = JSON.parse(fs.readFileSync("./package.json"));
+
+var name = _.get(packageConfig, "wcmModule.moduleConfig.angularModule", "");
 
 // Generate swagger documentation
 gulp.task("swagger", function() {
@@ -24,8 +27,8 @@ gulp.task("swagger", function() {
 gulp.task("templateCache", function() {
 	return gulp.src("./public/app/**/*.template.html")
 		.pipe(angularTemplatecache({
-			module: packageConfig.name + "_" + packageConfig.version,
-			root: "app/modules/" + packageConfig.name + "_" + packageConfig.version + "/public/app/",
+			module: name + "_" + packageConfig.version,
+			root: "app/modules/" + name + "_" + packageConfig.version + "/public/app/",
 		}))
 		.pipe(gulp.dest("./public/app/template-cache"));
 });
@@ -48,11 +51,11 @@ var bumpVersion = function bumpVersion(level) {
 };
 
 var bumpAngularModuleVersion = function bumpAngularModuleVersion(version) {
-	var reg = new RegExp("\"" + packageConfig.name + "_[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}", "g");
+	var reg = new RegExp("\"" + name + "_[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}", "g");
 	var reg2 = new RegExp("version: \"[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\",", "g");
 
 	return gulp.src(["./public/app/**/*.js"])
-		.pipe(replace(reg, "\"" + packageConfig.name + "_" + version))
+		.pipe(replace(reg, "\"" + name + "_" + version))
 		.pipe(replace(reg2, "version: \"" + version + "\","))
 		.pipe(gulp.dest("./public/app"));
 
