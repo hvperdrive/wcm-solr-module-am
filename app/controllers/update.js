@@ -1,4 +1,4 @@
 require("rootpath")();
-var Emitter = require("app/middleware/emitter");
+var Emitter = require("@wcm/module-helper").emitter;
 
-Emitter.on("contentUpdated", require("./upsert"));
+Emitter.on("content.updated", require("./upsert"));
