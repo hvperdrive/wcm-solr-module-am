@@ -1,3 +1,3 @@
 const { emitter } = require("@wcm/module-helper");
 
-emitter.on("content.updated", require("./upsert"));
+emitter.on("content.published", require("./upsert"));

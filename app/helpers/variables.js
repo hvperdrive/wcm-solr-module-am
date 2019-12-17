@@ -19,6 +19,7 @@ const validateFields = (data) => {
 		"currentDomain",
 		"consumerKey",
 		"consumerSecret",
+		"projectCT",
 	];
 	let validFields = true;
 
