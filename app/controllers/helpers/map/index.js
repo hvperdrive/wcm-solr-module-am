@@ -1,9 +1,9 @@
-const init = require("./init");
-const taxonomy = require("./taxonomy");
-const prepare = require("./prepare");
+var init = require("./init");
+var taxonomy = require("./taxonomy");
+var prepare = require("./prepare");
 
 module.exports = {
-	init,
-	taxonomy,
-	prepare,
+	init: init,
+	taxonomy: taxonomy,
+	prepare: prepare,
 };

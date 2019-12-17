@@ -1,3 +1,5 @@
+"use strict";
+
 const R = require("ramda");
 const Q = require("q");
 const path = require("path");

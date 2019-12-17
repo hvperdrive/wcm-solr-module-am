@@ -1,11 +1,11 @@
-const helpers = require("./helpers");
-const create = require("./create");
-const update = require("./update");
-const remove = require("./remove");
+var helpers = require("./helpers");
+var create = require("./create");
+var update = require("./update");
+var remove = require("./remove");
 
 module.exports = {
-	helpers,
-	create,
-	update,
-	remove,
+	helpers: helpers,
+	create: create,
+	update: update,
+	remove: remove,
 };

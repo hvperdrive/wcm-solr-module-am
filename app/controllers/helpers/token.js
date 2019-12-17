@@ -1,8 +1,12 @@
-const { isObject } = require("lodash");
-const request = require("request");
+require("rootpath")();
+var Q = require("q");
+var _ = require("lodash");
+var request = require("request");
 
-module.exports = (data) => new Promise((resolve, reject) => {
-	const options = {
+module.exports = function(data) {
+	var prom = Q.defer();
+
+	var options = {
 		method: "POST",
 		url: data.variables.searchApiDomain + "astad/search/v1/oauth2/token",
 		form: {
@@ -13,12 +17,14 @@ module.exports = (data) => new Promise((resolve, reject) => {
 		json: true,
 	};
 
-	request(options, (err, resp, body) => {
-		if (resp.statusCode === 200 && isObject(body) && body.hasOwnProperty("access_token") && body.access_token !== "") {
+	request(options, function(err, resp, body) {
+		if (resp.statusCode === 200 && _.isObject(body) && body.hasOwnProperty("access_token") && body.access_token !== "") {
 			data.accessToken = body.access_token;
-			return resolve(data);
+			prom.resolve(data);
+		} else {
+			prom.reject("Unable to obtain an access token");
 		}
-
-		reject("Unable to obtain an access token");
 	});
-});
+
+	return prom.promise;
+};

@@ -1,18 +1,20 @@
-const request = require("request");
-const { isObject } = require("lodash");
-const ErrorHandler = require("./error");
+require("rootpath")();
+var request = require("request");
+var _ = require("lodash");
+var Q = require("q");
+var ErrorHandler = require("./error");
 
-module.exports = (data) => new Promise((resolve, reject) => {
-	request(data.options, (err, resp, body) => {
-		if (!(resp.hasOwnProperty("statusCode") && resp.statusCode === 200 && isObject(body) && body.hasOwnProperty("success") && body.success)) {
+module.exports = function(data) {
+	var prom = Q.defer();
+
+	request(data.options, function(err, resp, body) {
+		if (!(resp.hasOwnProperty("statusCode") && resp.statusCode === 200 && _.isObject(body) && body.hasOwnProperty("success") && body.success)) {
 			// This is not good, save error
 			ErrorHandler(body, resp.statusCode, data.options);
-
-			return reject(err || body || resp);
 		}
-
 		data.request = body.success;
-
-		resolve(data);
+		prom.resolve(data);
 	});
-});
+
+	return prom.promise;
+};

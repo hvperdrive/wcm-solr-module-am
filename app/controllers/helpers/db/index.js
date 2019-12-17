@@ -1,3 +1,3 @@
 module.exports = {
-	getAll: require("./getAll"),
+	getAll: require("./getAll")
 };
