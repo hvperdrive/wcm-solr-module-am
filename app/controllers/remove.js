@@ -1,21 +1,18 @@
-require("rootpath")();
-var Helpers = require("./helpers");
-var VariableHelper = require("../helpers/variables");
-var Emitter = require("@wcm/module-helper").emitter;
+const helpers = require("./helpers");
+const VariableHelper = require("../helpers/variables");
+const { emitter } = require("@wcm/module-helper");
 
-Emitter.on("content.removed", function(data) {
-	if (Helpers.validate(data)) { // Check the CT
-		// Get the latest variables
-		VariableHelper()
-			.then(function onSuccess(variables) {
-				return Helpers.map.init(data, variables, "remove"); // Set start object
-			})
-			.then(Helpers.token)
-			.then(Helpers.map.taxonomy)
-			.then(Helpers.map.prepare)
-			.then(Helpers.request)
-			.catch(function(err) {
-				console.log("Oh ooh...", err); // eslint-disable-line no-console
-			});
+emitter.on("content.removed", (data) => {
+	if (helpers.validate(data)) { // Check the CT
+		return;
 	}
+
+	// Get the latest variables
+	VariableHelper()
+		.then((variables) => helpers.map.init(data, variables, "remove")) // Set start object
+		.then(helpers.token)
+		.then(helpers.map.taxonomy)
+		.then(helpers.map.prepare)
+		.then(helpers.request)
+		.catch((err) => console.log("Oh ooh...", err)); // eslint-disable-line no-console
 });

@@ -1,6 +1,6 @@
-var _ = require("lodash");
+const { get } = require("lodash");
 
-module.exports = function(data) {
+module.exports = (data) => {
 	// Check if we need to call the solr API based on safeLabel of CT
-	return (_.get(data, "meta.contentType.meta.safeLabel") && data.meta.contentType.meta.safeLabel.toLowerCase() === "projecten");
+	return get(data, "meta.contentType.meta.safeLabel") && data.meta.contentType.meta.safeLabel.toLowerCase() === "projecten";
 };

@@ -1,19 +1,18 @@
-require("rootpath")();
-var _ = require("lodash");
-var htmlToText = require("html-to-text");
+const { map, get } = require("lodash");
+const htmlToText = require("html-to-text");
 
-var methods = {
+const methods = {
 	upsert: "PUT",
 	remove: "DELETE",
 };
 
-var htmlToTextOptions = {
+const htmlToTextOptions = {
 	ignoreHref: true,
 	ignoreImage: true,
 	preserveNewlines: true,
 };
 
-module.exports = function(data) {
+module.exports = (data) => {
 	// Set request options
 	data.options = {
 		method: methods[data.method],
@@ -22,29 +21,29 @@ module.exports = function(data) {
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
-			authorization: "Bearer " + data.accessToken,
+			authorization: "Bearer " + get(data, "accessToken"),
 		},
 		json: true,
 		body: {
 			app: "antwerpenmorgen",
-			summary: htmlToText.fromString(data.project.fields.intro.nl, htmlToTextOptions),
+			summary: htmlToText.fromString(get(data, "project.fields.intro.nl", ""), htmlToTextOptions),
 			thumbnail: "",
 			languages: "nl",
-			keywords: _.map(data.project.meta.taxonomy.tags, function(tag) {
+			keywords: map(get(data, "project.meta.taxonomy.tags", []), (tag) => {
 				return tag.label.nl.toLowerCase();
 			}).join(","),
 			groupfield: "antwerpen morgen",
-			id: data.project.uuid,
+			id: get(data, "project.uuid"),
 			categories: [],
-			title: data.project.fields.title.nl,
-			body: htmlToText.fromString(data.project.fields.body.nl || "", htmlToTextOptions),
-			url: data.variables.currentDomain + "projecten/" + data.project.meta.slug.nl,
+			title: get(data, "project.fields.title.nl", ""),
+			body: htmlToText.fromString(get(data, "project.fields.body.nl", ""), htmlToTextOptions),
+			url: data.variables.currentDomain + "projecten/" + get(data, "project.meta.slug.nl", ""),
 		},
 	};
 
 	// Add ID if we want to remove the document
 	if (data.method === "remove") {
-		data.options.url += "/" + data.project.uuid;
+		data.options.url += "/" + get(data, "project.uuid", "");
 	}
 
 	return data;
