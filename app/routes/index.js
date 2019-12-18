@@ -1,4 +1,5 @@
-module.exports = function() {
-    // Require controllers to start listeners
-    require("../controllers/");
-};
+const syncAll = require("./syncAll");
+
+module.exports = (app) => {
+    syncAll(app);
+}
