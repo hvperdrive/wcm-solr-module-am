@@ -1,4 +1,3 @@
-require("rootpath")();
-var Emitter = require("@wcm/module-helper").emitter;
+const { emitter } = require("@wcm/module-helper");
 
-Emitter.on("content.updated", require("./upsert"));
+emitter.on("content.updated", require("./upsert"));

@@ -1,12 +1,14 @@
 require("rootpath")();
-var _ = require("lodash");
-var uuid = require("node-uuid");
-var ErrorModel = require("app/models/errorLog");
 
-module.exports = function(body, code, options) {
-	if (_.get(body, "msgs[0]")) {
+const { get } = require("lodash");
+const uuid = require("node-uuid");
+const ErrorModel = require("app/models/errorLog");
+
+module.exports = (body, code, options) => {
+	if (get(body, "msgs[0]")) {
 		body = body.msgs[0];
 	}
+
 	return ErrorModel
 		.create({
 			type: "module-solr",
