@@ -74,7 +74,7 @@
   "dependencies": {
     "@wcm/module-helper": "1.0.0",
     "html-to-text": "^3.3.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "node-uuid": "~1.4.7",
     "q": "~1.4.1",
     "ramda": "^0.25.0",
