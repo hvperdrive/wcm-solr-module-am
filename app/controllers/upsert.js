@@ -17,7 +17,7 @@ module.exports = (data) => {
 		.then(helpers.map.prepare)
 		.then(helpers.request)
 		.catch((err) => {
-			if (err & err.log === false) {
+			if (err && err.log === false) {
 				return;
 			}
 
