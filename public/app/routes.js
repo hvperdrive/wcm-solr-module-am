@@ -1,7 +1,7 @@
 "use strict";
 
 angular
-	.module("solr-am_1.0.5")
+	.module("solr-am_1.1.0")
 	.config([
 		"$stateProvider",
 		"solrAMConfigProvider",

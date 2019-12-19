@@ -1,10 +1,10 @@
 {
   "name": "@wcm/solr-am",
-  "version": "1.1.0-1",
+  "version": "1.1.0",
   "description": "Solr module",
   "main": "app",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/istanbul cover --dir ./coverage ./node_modules/.bin/_mocha -- -R spec -t 15000 --recursive --slow 2"
+    "test": "NODE_EN0=test ./node_modules/.bin/istanbul cover --dir ./coverage ./node_modules/.bin/_mocha -- -R spec -t 15000 --recursive --slow 2"
   },
   "keywords": [
     "solr",
