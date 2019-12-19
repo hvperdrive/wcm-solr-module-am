@@ -2,7 +2,7 @@ const helpers = require("./helpers");
 const VariableHelper = require("../helpers/variables");
 const { emitter } = require("@wcm/module-helper");
 
-emitter.on("content.removed", (data) => {
+const removeItem = (data) => {
 	// Get the latest variables
 	VariableHelper()
 		.then((variables) => {
@@ -24,4 +24,7 @@ emitter.on("content.removed", (data) => {
 
 			console.log("Oh ooh...", err); // eslint-disable-line no-console
 		});
-});
+};
+
+emitter.on("content.removed", (data) => removeItem(data));
+emitter.on("content.unpublished", (data) => removeItem(data));
