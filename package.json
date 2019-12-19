@@ -1,6 +1,6 @@
 {
   "name": "@wcm/solr-am",
-  "version": "1.0.5",
+  "version": "1.1.0-1",
   "description": "Solr module",
   "main": "app",
   "scripts": {
@@ -11,7 +11,7 @@
     "search"
   ],
   "publishConfig": {
-    "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
+    "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private/"
   },
   "wcmModule": {
     "angularDirPath": "public/app/",
@@ -51,7 +51,7 @@
           },
           {
             "label": "Consumer key",
-            "description": "Your consumer key for Twitter.",
+            "description": "Your consumer key for Astad SOLR.",
             "key": "consumerKey",
             "value": "",
             "type": "text",
@@ -59,8 +59,16 @@
           },
           {
             "label": "Consumer secret",
-            "description": "The consumer secret for Twitter",
+            "description": "The consumer secret for Astad SOLR",
             "key": "consumerSecret",
+            "value": "",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Project CT ID",
+            "description": "Projecten content-type `_id`",
+            "key": "projectCT",
             "value": "",
             "type": "text",
             "required": true
@@ -74,7 +82,7 @@
   "dependencies": {
     "@wcm/module-helper": "1.0.0",
     "html-to-text": "^3.3.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "node-uuid": "~1.4.7",
     "q": "~1.4.1",
     "ramda": "^0.25.0",

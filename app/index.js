@@ -1,6 +1,6 @@
-var variablesHelper = require("./helpers/variables");
+const variablesHelper = require("./helpers/variables");
 
-module.exports = function(app, hooks, info) {
+module.exports = (app, hooks, info) => {
 	variablesHelper.set(info);
 
 	// Require controllers to start listeners

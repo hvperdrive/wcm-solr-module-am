@@ -1,20 +1,26 @@
-require("rootpath")();
-var Helpers = require("./helpers");
-var VariableHelper = require("../helpers/variables");
+const helpers = require("./helpers");
+const variableHelper = require("../helpers/variables");
 
-module.exports = function(data) {
-	if (Helpers.validate(data)) { // Check the CT
-		// Get the latest variables
-		VariableHelper()
-			.then(function onSuccess(variables) {
-				return Helpers.map.init(data, variables, "upsert"); // Set start object
-			})
-			.then(Helpers.token)
-			.then(Helpers.map.taxonomy)
-			.then(Helpers.map.prepare)
-			.then(Helpers.request)
-			.catch(function(err) {
-				console.log("Oh ooh...", err); // eslint-disable-line no-console
-			});
-	}
+module.exports = (data) => {
+	// Get the latest variables
+	variableHelper()
+		.then((variables) => {
+			if (!helpers.validate(data, variables)) {
+				throw { log: false };
+			}
+
+			return variables;
+		})
+		.then((variables) => helpers.map.init(data, variables, "upsert")) // Set start object
+		.then(helpers.token)
+		.then(helpers.map.taxonomy)
+		.then(helpers.map.prepare)
+		.then(helpers.request)
+		.catch((err) => {
+			if (err & err.log === false) {
+				return;
+			}
+
+			console.log("Oh ooh...", err); // eslint-disable-line no-console
+		});
 };

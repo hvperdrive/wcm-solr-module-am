@@ -1,10 +1,9 @@
-var _ = require("lodash");
-var Q = require("q");
-var VariableHelper = require("@wcm/module-helper").variables;
+const { get } = require("lodash");
+const { variables: variablesHelper } = require("@wcm/module-helper");
 
-var packageInfo;
+let packageInfo;
 
-var checkUrl = function(url) {
+const checkUrl = (url) => {
 	// Check if last character is a /
 	if (url.slice(-1) !== "/") {
 		// Add / at the end
@@ -14,16 +13,17 @@ var checkUrl = function(url) {
 	return url;
 };
 
-var validateFields = function(data) {
-	var fields = [
+const validateFields = (data) => {
+	const fields = [
 		"searchApiDomain",
 		"currentDomain",
 		"consumerKey",
 		"consumerSecret",
+		"projectCT",
 	];
-	var validFields = true;
+	let validFields = true;
 
-	fields.forEach(function(field) {
+	fields.forEach((field) => {
 		if (!~Object.keys(data).indexOf(field) || data[field] === "") {
 			validFields = false;
 		}
@@ -32,51 +32,33 @@ var validateFields = function(data) {
 	return validFields;
 };
 
-var checkVariables = function(response) {
-	var prom = Q.defer();
-
+const checkVariables = (response) => new Promise((resolve, reject) => {
 	// Check if solr items are defined
-	if (_.get(response, "solr.variables") && validateFields(response.solr.variables)) {
+	if (get(response, "solr.variables") && validateFields(response.solr.variables)) {
 		response = response.solr.variables;
 		// Validate url's
 		response.currentDomain = checkUrl(response.currentDomain);
 		response.searchApiDomain = checkUrl(response.searchApiDomain);
 
-		prom.resolve(response);
-	} else {
-		prom.reject("Unable to get variables");
+		return resolve(response);
 	}
 
-	return prom.promise;
-};
+	return reject("Unable to get variables");
+});
 
-module.exports = function() {
+module.exports = () => new Promise((resolve, reject) => {
 	if (!packageInfo) {
 		throw "No package info available!";
 	}
 
-	var prom = Q.defer();
-
 	// Get variables from cms
-	VariableHelper
+	variablesHelper
 		.getAll(packageInfo.name, packageInfo.version)
-		.then(function onSuccess(response) {
-			return checkVariables(response);
-		})
-		.then(function onSuccess(response) {
-			prom.resolve(response);
-		})
-		.catch(function onError(responseError) {
-			prom.reject(responseError);
-		});
+		.then((response) => checkVariables(response))
+		.then(resolve)
+		.catch(reject);
+});
 
-	return prom.promise;
-};
+module.exports.set = (info) => packageInfo = info;
 
-module.exports.set = function set(info) {
-	packageInfo = info;
-};
-
-module.exports.get = function get() {
-	return packageInfo;
-};
+module.exports.get = () => packageInfo;
