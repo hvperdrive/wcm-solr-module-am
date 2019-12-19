@@ -4,8 +4,8 @@ const update = require("./update");
 const remove = require("./remove");
 
 module.exports = {
-    helpers,
-    create,
+	helpers,
+	create,
 	update,
 	remove,
 };
