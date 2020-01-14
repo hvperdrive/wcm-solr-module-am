@@ -1,18 +1,22 @@
+const { get } = require("lodash");
 const helpers = require("./helpers");
 const VariableHelper = require("../helpers/variables");
 const { emitter } = require("@wcm/module-helper");
 
-const removeItem = (data) => {
+const remove = (data) => {
+	const content = get(data, "toJSON", false) ? data.toJSON() : data;
 	// Get the latest variables
+
 	VariableHelper()
 		.then((variables) => {
-			if (!helpers.validate(data, variables)) {
+			if (!helpers.validate(content, variables, { isRemove: true })) {
+				console.log("validation failed");
 				throw { log: false };
 			}
 
 			return variables;
 		})
-		.then((variables) => helpers.map.init(data, variables, "remove")) // Set start object
+		.then((variables) => helpers.map.init(content, variables, "remove")) // Set start object
 		.then(helpers.token)
 		.then(helpers.map.taxonomy)
 		.then(helpers.map.prepare)
@@ -26,5 +30,5 @@ const removeItem = (data) => {
 		});
 };
 
-emitter.on("content.removed", (data) => removeItem(data));
-emitter.on("content.unpublished", (data) => removeItem(data));
+emitter.on("content.unpublished", remove);
+emitter.on("content.removed", remove);
