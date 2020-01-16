@@ -5,7 +5,6 @@ module.exports = (data) => {
 	// Get the latest variables
 	variableHelper()
 		.then((variables) => {
-
 			if (!helpers.validate(data, variables)) {
 				throw { log: false };
 			}

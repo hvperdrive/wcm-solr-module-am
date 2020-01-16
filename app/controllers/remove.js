@@ -10,7 +10,6 @@ const remove = (data) => {
 	VariableHelper()
 		.then((variables) => {
 			if (!helpers.validate(content, variables, { isRemove: true })) {
-				console.log("validation failed");
 				throw { log: false };
 			}
 
