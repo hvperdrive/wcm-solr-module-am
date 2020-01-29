@@ -42,9 +42,17 @@
             "required": true
           },
           {
-            "label": "Current domain",
-            "description": "Current domain.",
-            "key": "currentDomain",
+            "label": "Current AM domain",
+            "description": "Current AM domain.",
+            "key": "currentAMDomain",
+            "value": "",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Current DGV domain",
+            "description": "Current DGV domain.",
+            "key": "currentDGVDomain",
             "value": "",
             "type": "text",
             "required": true
