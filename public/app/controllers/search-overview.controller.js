@@ -1,7 +1,7 @@
 "use strict";
 
 angular
-	.module("solr-am_1.1.0.controllers")
+	.module("solr-am_1.1.1.controllers")
 	.controller("solrAMOverviewController", [
 		"$scope",
 		"$timeout",
