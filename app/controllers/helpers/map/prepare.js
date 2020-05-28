@@ -13,6 +13,8 @@ const htmlToTextOptions = {
 };
 
 module.exports = (data) => {
+	const isDGV = data.medium !== "am";
+
 	// Set request options
 	data.options = {
 		method: methods[data.method],
@@ -33,17 +35,25 @@ module.exports = (data) => {
 				return tag.label.nl.toLowerCase();
 			}).join(","),
 			groupfield: "antwerpen morgen",
-			id: get(data, "project.uuid"),
+			id: isDGV ?
+				`${get(data, "project.uuid")}-${data.medium}` :
+				get(data, "project.uuid"),
 			categories: [],
-			title: get(data, "project.fields.title.nl", ""),
+			title: isDGV ?
+				`${(get(data, "project.fields.title.nl") || get(data, "project.fields.title"))} - De Grote Verbinding` :
+				(get(data, "project.fields.title.nl") || get(data, "project.fields.title")),
 			body: htmlToText.fromString(get(data, "project.fields.body.nl", ""), htmlToTextOptions),
-			url: data.variables.currentDomain + "projecten/" + get(data, "project.meta.slug.nl", ""),
+			url: isDGV ?
+				data.variables.currentDomainDGV + "projecten/" + get(data, "project.meta.slug.nl", "") :
+				data.variables.currentDomain + "projecten/" + get(data, "project.meta.slug.nl", ""),
 		},
 	};
 
 	// Add ID if we want to remove the document
 	if (data.method === "remove") {
-		data.options.url += "/" + get(data, "project.uuid", "");
+		const projectUuid = isDGV ? `${get(data, "project.uuid")}-${data.medium}` : get(data, "project.uuid");
+
+		data.options.url += "/" + projectUuid;
 	}
 
 	return data;
