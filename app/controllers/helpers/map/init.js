@@ -1,5 +1,6 @@
-module.exports = (project, variables, method) => ({
+module.exports = (project, variables, medium, method) => ({
 	project,
 	variables,
+	medium,
 	method,
 });
