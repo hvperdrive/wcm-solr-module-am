@@ -9,28 +9,13 @@ const remove = module.exports.remove = (data, medium) => {
 	// Get the latest variables
 	return VariableHelper()
 		.then((variables) => {
-			const validated = helpers.validate(data, variables, { isRemove: true });
-
-			if (!validated.isValidProject) {
+			if (!helpers.validate(content, variables, { isRemove: true })) {
 				throw { log: false };
 			}
 
 			return variables;
 		})
-		.then((variables) => {
-			const media = helpers.validate(content, variables).context;
-			let context = medium;
-
-			if (!medium) {
-				context = media["dgv-website"] ? "dgv" : "am";
-			}
-
-			return {
-				variables,
-				context,
-			};
-		})
-		.then((vars) => helpers.map.init(content, vars.variables, vars.context, "remove")) // Set start object
+		.then((variables) => helpers.map.init(content, variables, "remove")) // Set start object
 		.then(helpers.token)
 		.then(helpers.map.taxonomy)
 		.then(helpers.map.prepare)

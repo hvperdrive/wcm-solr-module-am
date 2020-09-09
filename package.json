@@ -50,14 +50,6 @@
             "required": true
           },
           {
-            "label": "Current domain DGV",
-            "description": "Current domain DGV.",
-            "key": "currentDomainDGV",
-            "value": "",
-            "type": "text",
-            "required": true
-          },
-          {
             "label": "Consumer key",
             "description": "Your consumer key for Astad SOLR.",
             "key": "consumerKey",
@@ -77,14 +69,6 @@
             "label": "Project CT ID",
             "description": "Projecten content-type `_id`",
             "key": "projectCT",
-            "value": "",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Ringpark CT ID",
-            "description": "Ringparken content-type `_id`",
-            "key": "RingparkCT",
             "value": "",
             "type": "text",
             "required": true
