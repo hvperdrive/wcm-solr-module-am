@@ -9,6 +9,7 @@ module.exports = () => {
 	const settings = {};
 
 	return ContentModel.find({
+		"fields.medium.website": true,
 		"meta.deleted": false,
 		"meta.published": true,
 	})
